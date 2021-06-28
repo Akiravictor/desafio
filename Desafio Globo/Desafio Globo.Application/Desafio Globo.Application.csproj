@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Desafio_Globo.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Desafio Globo.CrossCutting\Desafio Globo.CrossCutting.csproj" />
+    <ProjectReference Include="..\Desafio Globo.Domain\Desafio Globo.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

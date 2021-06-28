@@ -1,0 +1,49 @@
+﻿@page
+@model Desafio_Globo.Web.Areas.Identity.Pages.Account.Manage.AccountsModel
+@{
+	ViewData["Title"] = "Accounts";
+	ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<hr />
+	<a class="btn btn-primary nav-link @ManageNavPages.NewUserNavClass(ViewContext)" id="manage-accounts" asp-page="./NewUser">Adicionar</a>
+<hr />
+<div class="row">
+	<div class="col-md-6">
+		<form id="profile-form" method="post">
+
+			<table class="table table-sm">
+				<thead class="thead-light">
+					<tr class="align-items-baseline">
+						<th>Username</th>
+						<th>Role</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var user in Model.userRoles)
+					{
+						<tr>
+							<td>@user.Username</td>
+							<td>@user.Role</td>
+							<td>
+								<a class="btn btn-primary nav-link @ManageNavPages.EditUserNavClass(ViewContext)" asp-route-id="@user.UserId" id="edit-accounts" asp-page="./EditUser">Editar</a>
+							</td>
+							<td>
+								<input type="submit" value="Delete" asp-page-handler="Delete" asp-page="./Accounts" asp-route-id="@user.UserId" asp-for="@user.UserId" class="btn btn-danger" />
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+
+
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

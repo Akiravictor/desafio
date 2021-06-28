@@ -1,0 +1,88 @@
+﻿@*
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Desafio_Globo.Domain.Models.AwsUsage
+
+
+@{
+	<p></p>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<canvas id="cpuUsage" width="300" height="300"></canvas>
+			</div>
+			<div class="col">
+				<canvas id="memoryUsage" width="300" height="300"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var canvas1 = document.getElementById('cpuUsage').getContext('2d');
+
+		const data = {
+			labels: [@Html.Raw(Model.CpuUsage.Labels)],
+			datasets: [{
+				label: 'CPU Usage',
+				backgroundColor: 'rgb(255, 99, 132)',
+				borderColor: 'rgb(255, 99, 132)',
+				data: [@Model.CpuUsage.Data]
+			}]
+		};
+
+		let options1 = {
+			scales: {
+				y: {
+					min: 0,
+					max: 100,
+					ticks: {
+						stepSize: 10
+					}
+				}
+			}
+		};
+
+		const config1 = {
+			type: 'line',
+			data: data,
+			options: options1,
+			responsive: true
+		};
+
+		var myChart1 = new Chart(canvas1, config1);
+
+		var canvas2 = document.getElementById('memoryUsage').getContext('2d');
+
+		const data2 = {
+			labels: [@Html.Raw(Model.MemoryUsage.Labels)],
+			datasets: [{
+			label: 'Memory Usage',
+				backgroundColor: 'rgb(255, 99, 255)',
+				borderColor: 'rgb(255, 99, 132)',
+				data: [@Model.MemoryUsage.Data]
+			}]
+		};
+
+		let options2 = {
+			scales: {
+				y: {
+					min: @Model.MemoryUsage.MinData,
+					max: @Model.MemoryUsage.MaxData,
+					ticks: {
+						stepSize: 0.5
+					}
+				}
+			}
+		};
+
+		const config2 = {
+			type: 'line',
+			data: data2,
+			options: options2,
+			responsive: true
+		};
+
+			var myChart2 = new Chart(canvas2, config2);
+
+	</script>
+}
